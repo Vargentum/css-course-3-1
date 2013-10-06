@@ -1,0 +1,22 @@
+//css reset
+@import "compass/reset";
+
+//html5boilerplate
+@import "h5bp";
+@include h5bp-display;
+@include h5bp-chromeframe;
+@include h5bp-media;
+@include h5bp-base;
+@include h5bp-typography;
+@include h5bp-figures;
+@include h5bp-forms;
+@include h5bp-embeds;
+@include h5bp-tables;
+@include h5bp-helpers;
+
+//COMPASS
+@import "compass";
+@import "compass/layout/sticky-footer";
+
+//GRID for compass
+@import "susy";

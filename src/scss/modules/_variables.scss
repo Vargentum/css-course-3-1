@@ -1,0 +1,34 @@
+// layout params
+$baseMaxWidth                       : 960px;
+$baseMinWidth                       : 320px;
+$footerHeight                       : 110px;
+// colors
+$baseFontColor                      : #8f8f8f;
+$titleColor 						: #353c3e;
+$attentionColor                     : #f26c4f;
+$inputColor                         : $baseFontColor;
+//links colors
+$linkColor                          : $attentionColor;
+$activeLinkColor                    : $attentionColor;
+$visitedLinkColor                   : $attentionColor;
+$hoverLinkColor                     : $attentionColor;
+$focusedLinkColor                   : $hoverLinkColor;
+//fonts
+$baseFamily                         : "Montserrat", sans-serif;
+//misc
+$baseFontSize                       : 12px;
+$baseLineHeight                     : 1.5;
+$paragraphSpace                     : 15px;
+$inputHeight                        : 40px;
+$experimental-support-for-svg       : true;
+
+//susy options
+$total-columns                      : 24;
+$column-width                       : 30px;
+$gutter-width                       : 10px;
+$grid-padding                       : 0;
+
+//breakpoints vars
+$break-1-header                     : 670px;
+$break-2-header                     : 510px;
+$break-1-templateIndex              : 800px;

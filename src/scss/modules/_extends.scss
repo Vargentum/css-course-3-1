@@ -1,0 +1,86 @@
+%pseudo-block{
+  content: '';
+  display: block;
+  position: absolute;
+}
+%pseudo-inline{
+  content: '';
+  display: inline-block;
+}
+%input-reset{
+  background-color: transparent;
+  border: none;
+  &:hover,&:focus{outline: none;}
+}
+%text-hide {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+%dl-inline{
+  @include pie-clearfix;
+  &>dt{float: left; margin-right: 5px;}
+}
+%no-focusOutline{
+  &:focus{outline: none;}
+}
+
+//Line helpers
+%hLine{&>*{display: inline-block;}}
+%hLine-top{
+  @extend %hLine;
+  &>*{vertical-align: top;}
+}
+%jLine{
+  text-align: justify;
+  line-height: 0;
+  font-size: 1px;
+  text-justify: newspaper;
+  zoom:1;
+  text-align-last: justify;
+  &:after{
+    content: "";
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 100%;
+  }
+  &>*{
+    text-align: left;
+    display: inline-block;
+    line-height: $baseLineHeight;
+    font-size: $baseFontSize;
+  }
+}
+%jLine-top{
+  @extend %jLine;
+  &>*{vertical-align: top;}
+}
+%flexbox{
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+%container{
+  max-width:$baseMaxWidth;
+  min-width: $baseMinWidth;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.l-hLine{@extend %hLine;}
+.l-hLine-top{@extend %hLine-top;}
+.l-jLine{@extend %jLine;}
+.l-jLine-top{@extend %jLine-top;}
+.l-flexbox{@extend %flexbox;}
+.l-container{
+  @extend %container;
+  .flexbox &{@extend %flexbox;}
+  //susy grid fallback
+  .no-flexbox &{
+    @include container;
+  }
+}

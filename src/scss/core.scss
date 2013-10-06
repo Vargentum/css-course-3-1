@@ -1,0 +1,400 @@
+@charset "utf-8";
+
+@import "modules/_variables";
+@import "modules/_imports";
+@import "modules/_fonts";
+@import "modules/_extends";
+@import "modules/_mixins";
+@import "modules/_inputs";
+@import "modules/_typography";
+
+/*===============================================================
+COMMON
+===============================================================*/
+*,*:before,*:after,input[type=search]{@include box-sizing(border-box);}
+
+
+@import "icons/*.png";
+@include all-icons-sprites;
+
+body {
+  height: 100%;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+  background-color: #f6f6f6;
+}
+
+/*===============================================================
+OOCSS
+===============================================================*/
+.oo-title{
+  font-size: 16px;
+  color: $attentionColor;
+  margin-bottom: 5px;
+}
+/*===============================================================
+HEADER
+===============================================================*/
+.l-header{
+  position: relative;
+  //@extend %container;
+}
+.l-header__top{
+  background-color: #353c3e;
+  .l-container{
+    @include vendorize(justify-content, space-between);
+    @include vendorize(align-items, center);
+    @include breakpoint($break-1-header){
+      @include vendorize(flex-direction, column);
+    }
+  }
+}
+.l-header__btm{
+  background-color: #40494c;
+  .l-container{
+    @include vendorize(justify-content, space-between);
+    @include vendorize(align-items, center);
+    @include breakpoint($break-1-header){
+      @include vendorize(flex-direction, column);
+    }
+    @include breakpoint($break-2-header){
+      @include vendorize(flex-direction, row);
+    }
+  }
+}
+
+.logo{
+  text-decoration:none;
+  margin-bottom: -6px;
+  @extend %no-focusOutline;
+  .flexbox &{@include fluid-width(250px, 950px);}
+  .no-flexbox &{@include span-columns(7);}
+  img{width: 100%;}
+  @include breakpoint($break-1-header){
+    .flexbox &{width: 250px; margin:auto;}
+    .no-flexbox &{
+      @include span-columns(24);
+      text-align: center;
+      img{
+        display: inline-block;
+        width: 250px;
+      }
+    }
+  }
+}
+.logo__hidden{
+  @extend %text-hide;
+  position:absolute;
+}
+.slogan{
+  color: #949494;
+  text-align: right;
+  padding-right: 5px;
+  .flexbox &{@include fluid-width(650px, 950px)}
+  .no-flexbox &{@include span-columns(16 omega);}
+  @include breakpoint($break-1-header){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+    text-align: center;
+    margin: 10px;
+  }
+}
+
+.nav{
+  @extend %hLine;
+  .flexbox &{@include fluid-width(750px, 950px)}
+  .no-flexbox &{@include span-columns(18);}
+  @include breakpoint($break-1-header){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+    text-align: center;
+  }
+  @include breakpoint($break-2-header){
+    .flexbox &{width: 50%;}
+    .no-flexbox &{@include span-columns(12);}
+    text-align: left;
+    padding: 10px 0;
+  }
+}
+.nav__link{
+  padding: 15px 25px 15px 0;
+  @include simpleLink(#717b7e, #fff);
+  text-decoration: none;
+  text-transform: uppercase;
+  &:last-child{padding-right: 0;}
+  &:after{
+    content: '/';
+    margin-left: 1px;
+  }
+  &.is-active{
+    @include singleLink(#fff);
+  }
+  @include breakpoint($break-2-header){
+    padding: 5px 10px;
+    display: block;
+  }
+}
+
+.search{
+  position: relative;
+  @include placeholder-color(#717a7e);
+  .flexbox &{@include fluid-width(190px, 950px);}
+  .no-flexbox &{@include span-columns(5 omega)}
+  @include breakpoint($break-1-header){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+  }
+  @include breakpoint($break-2-header){
+    .flexbox &{width: 50%;}
+    .no-flexbox &{@include span-columns(12 omega);}
+  }
+}
+.search__field{
+  height: 60px;
+  width: 100%;
+  background-color: #3c4345;
+  border:none;
+  text-transform: uppercase;
+  padding: 0 50px 0 20px;
+  @extend %no-focusOutline;
+  @include single-transition($duration:.4s);
+  &:focus{
+    box-shadow: inset 0 0 5px 1px #717a7e;
+  }
+}
+.search__submitBtn{
+  @extend %text-hide;
+  @include icons-sprite('icon-search');
+  width: 26px;
+  height: 21px;
+  @include position(absolute, 50% 20px 0 0);
+  margin-top: -10px;
+}
+
+
+/*===============================================================
+INDEX PAGE TEMPLATE
+===============================================================*/
+.template-index{
+  max-width: $baseMaxWidth;
+  min-width: $baseMinWidth;
+  margin: auto;
+  padding: 25px 0;
+}
+.index__header{
+  color: #ccc;
+  line-height: 2;
+  text-align: center;
+  padding: 50px 0;
+}
+.index__title{
+  font-size: 24px;
+  line-height: $baseLineHeight;
+  color: #777;
+  margin-bottom: 15px;
+}
+.index__footer{
+  text-align: right;
+  padding-bottom: 100px;
+  color: #bebebe;
+  p{
+    @include span-columns(14 omega);
+  }
+  @include breakpoint($break-2-header){
+    p{
+      @include span-columns(24 omega);
+      text-align: left;
+    }
+  }
+}
+.copy{
+  display: block;
+  margin-bottom: 10px;
+  color: $titleColor;
+  @include breakpoint($break-2-header){
+    text-align: left;
+  }
+}
+
+.recentWorks{
+  @extend .l-container;
+  margin-bottom: 60px;
+  .flexbox &{@include vendorize(justify-content, space-between);}
+  @include breakpoint($break-1-templateIndex){
+    .flexbox &{@include vendorize(flex-direction, column);}
+  }
+}
+.recentWorks__header{
+  .flexbox &{@include fluid-width(190px, 950px);}
+  .no-flexbox &{@include span-columns(5);}
+  @include breakpoint($break-1-templateIndex){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+    margin-bottom: 10px;
+  }
+}
+.recentWorks__title {
+  color: $titleColor;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.recentWorks__list{
+  .flexbox &{@include fluid-width(710px, 950px);}
+  .no-flexbox &{@include span-columns(18 omega);}
+  @include breakpoint($break-1-templateIndex){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+  }
+}
+.recentWorks__unit{
+  position: relative;
+  @include span-columns(8);
+  &:nth-child(3n){@include omega;}
+  background-color: #fff;
+  border-bottom: 3px solid #eaeaea;
+  padding-bottom: 60px;
+  height: 485px;
+  overflow: hidden;
+//  border emulator
+  &:after{
+    @extend %pseudo-block;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    left:0;
+    bottom: 0;
+  }
+  @include breakpoint($break-2-header){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+    margin-bottom: 10px;
+    height: auto;
+  }
+}
+.recentWorks__unit__image{
+  border-bottom: 3px solid $attentionColor;
+  width: 100%;
+  display: block;
+  max-width: 100%;
+  @include breakpoint($break-2-header){
+    width: 100%;
+    height: 202px;
+  }
+}
+.recentWorks__unit__title{
+  margin: 15px 0;
+  padding: 0 40px;
+  text-transform: uppercase;
+  color: $attentionColor;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.recentWorks__unit__description{
+  padding: 0 40px;
+}
+
+.aboutAuthor__container{
+  margin: 40px 0;
+  @extend .l-container;
+  .flexbox &{@include vendorize(justify-content, space-between);}
+  @include breakpoint($break-1-templateIndex){
+    .flexbox &{@include vendorize(flex-direction, column);}
+  }
+}
+.aboutAuthor{
+  .flexbox &{
+    width: 49.5%;
+    @extend %flexbox;
+    @include vendorize(justify-content, space-between);
+    @include vendorize(align-items, stretch);
+  }
+  .no-flexbox &{
+    @include span-columns(12);
+    &:nth-child(2n){@include omega;}
+  }
+  @include breakpoint($break-1-templateIndex){
+    .flexbox &{width: 100%;}
+    .no-flexbox &{@include span-columns(24);}
+    margin-bottom: 10px;
+  }
+}
+.aboutAuthor__header{
+  position: relative;
+  background-color: #fff;
+  border-bottom: 3px solid #eaeaea;
+  padding: 40px;
+  .flexbox &{width: 50%;}
+  .no-flexbox &{
+    @include span-columns(12);
+  //  fill the space between header and main
+    &:before{
+      @extend %pseudo-block;
+      width: 10px;
+      height: inherit;
+      background-color: #fff;
+      border-bottom: 3px solid #eaeaea;
+      top:0;
+      left: 100%;
+    }
+  }
+  @include breakpoint(430px){
+    padding: 20px;
+  }
+}
+.aboutAuthor__title{
+  @extend .oo-title;
+}
+.aboutAuthor__main{
+  position: relative;
+  .flexbox &{width: 50%;}
+  .no-flexbox &{@include span-columns(12 omega);}
+}
+.aboutAuthor__main--settings{
+  background-color: #f16b4f;
+  border-bottom: 3px solid #e05d41;
+  // icon
+  &:before{
+    @extend %pseudo-block;
+    @include icons-sprite(icon-settings);
+    @include centering-absolute(25px, 26px);
+  }
+}
+.aboutAuthor__main--camera{
+  background-color: #353c3e;
+  border-bottom: 3px solid #000;
+  // icon
+  &:before{
+    @extend %pseudo-block;
+    @include icons-sprite(icon-camera);
+    @include centering-absolute(29px, 24px);
+  }
+}
+
+
+/*===============================================================
+PLUGIN OVERRIDING
+===============================================================*/
+
+/*===============================================================
+HACKS
+===============================================================*/
+@-moz-document url-prefix() {}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  /* Safari and Chrome */
+  .selector{}
+  /* Safari only override */
+  ::i-block-chrome,.selector{}
+}
+
+
+//debug grid
+//* { outline: 2px dotted red; }
+//* * { outline: 2px dotted green; }
+//* * * { outline: 2px dotted orange; }
+//* * * * { outline: 2px dotted blue; }
+//* * * * * { outline: 1px solid red; }
+//* * * * * * { outline: 1px solid green; }
+//* * * * * * * { outline: 1px solid orange; }
+//* * * * * * * * { outline: 1px solid blue; }
